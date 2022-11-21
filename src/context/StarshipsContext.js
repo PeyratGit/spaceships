@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-
+localStorage.clear()
 export const starshipsContext = createContext();
 
 const StarshipsContextProvider = ({ children }) => {
@@ -25,9 +25,9 @@ const StarshipsContextProvider = ({ children }) => {
         while(tempStarships.length !== starshipsCount) {
           const response2 = await fetch(`https://swapi.dev/api/starships/?format=json&page=${counter}`)
           const data2 = await response2.json()
-          data2.results.map(starship => {
+          data2.results.map(starship => (
             starship.creation_date = new Date()
-          })
+          ))
           tempStarships = [...tempStarships, ...data2.results]
           counter++
         }
